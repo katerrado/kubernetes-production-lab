@@ -1,10 +1,10 @@
+preUpgradeChecker:
+  jobEnabled: false
+
 defaultSettings:
   defaultReplicaCount: 2
-
   defaultDataPath: /var/lib/longhorn
-
   storageMinimalAvailablePercentage: 15
-
   storageOverProvisioningPercentage: 100
 
 persistence:
