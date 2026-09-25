@@ -95,3 +95,7 @@ kubernetes-production-lab/
 ├── scripts/
 │
 └── README.md
+
+## Project Status
+
+Phase 1A: Repository and GitOps foundation in progress.
