@@ -1,0 +1,27 @@
+# Raw environment inventory
+docs/baseline/raw/
+
+# Kubernetes credentials
+.kube/
+kubeconfig
+*kubeconfig*
+*.key
+*.crt
+
+# Secrets
+*.secret.yaml
+*.secrets.yaml
+secrets/
+.env
+
+# Helm dependency cache
+charts/
+
+# Editor files
+.vscode/
+.idea
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
