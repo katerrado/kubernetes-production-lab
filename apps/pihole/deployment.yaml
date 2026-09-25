@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: pihole
+  namespace: pihole
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: pihole
+
+  template:
+    metadata:
+      labels:
+        app: pihole
+
+    spec:
+      containers:
+        - name: pihole
+          image: pihole/pihole:latest
+
+          env:
+            - name: TZ
+              value: America/Los_Angeles
+
+            - name: FTLCONF_dns_listeningMode
+              value: ALL
+
+            - name: FTLCONF_dns_upstreams
+              value: "1.1.1.1;9.9.9.9"
+
+            - name: FTLCONF_misc_dnsmasq_lines
+              value: >-
+                address=/test.k8s.home/10.10.10.201;
+                address=/pihole.k8s.home/10.10.10.201
+          ports:
+            - name: dns-tcp
+              containerPort: 53
+              protocol: TCP
+
+            - name: dns-udp
+              containerPort: 53
+              protocol: UDP
+
+            - name: http
+              containerPort: 80
+              protocol: TCP
