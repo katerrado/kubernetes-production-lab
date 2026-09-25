@@ -99,3 +99,5 @@ kubernetes-production-lab/
 ## Project Status
 
 Phase 1A: Repository and GitOps foundation in progress.
+
+> Repository changes are validated through pull requests and CI checks.
