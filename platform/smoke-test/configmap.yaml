@@ -4,4 +4,4 @@ metadata:
   name: gitops-smoke-test
 data:
   managed-by: argocd
-  purpose: verify-gitops-reconciliation
+  purpose: production-platform-gitops-test
