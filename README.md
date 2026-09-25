@@ -101,3 +101,59 @@ kubernetes-production-lab/
 Phase 1A: Repository and GitOps foundation in progress.
 
 > Repository changes are validated through pull requests and CI checks.
+
+## Documentation
+
+Detailed project documentation is maintained under the
+[`docs/`](docs/) directory.
+
+Key documentation:
+
+- [Architecture](docs/architecture/cluster-architecture.md)
+- [Git Workflow](docs/operations/git-workflow.md)
+- [Argo CD Bootstrap and Recovery](docs/operations/argocd-bootstrap.md)
+
+## Current Project Status
+
+### Phase 1 — Kubernetes and GitOps Foundation
+
+- [x] Multi-node Kubernetes cluster
+- [x] Container runtime configuration
+- [x] Kubernetes networking
+- [x] GitHub repository structure
+- [x] Pull-request workflow
+- [x] CI manifest validation
+- [x] Argo CD deployment
+- [x] App-of-Apps implementation
+- [x] Argo CD self-management
+- [x] Automated drift reconciliation
+- [x] Bootstrap and recovery documentation
+
+### Phase 2 — Platform Networking
+
+- [ ] MetalLB
+- [ ] LoadBalancer address pool
+- [ ] Gateway API
+- [ ] Ingress / gateway controller
+- [ ] Internal DNS integration
+
+
+## Skills Demonstrated
+
+This project demonstrates hands-on experience with:
+
+- Kubernetes administration
+- kubeadm cluster deployment
+- containerd
+- Kubernetes networking
+- GitOps
+- Argo CD
+- Helm
+- Kubernetes YAML
+- Git branching and pull requests
+- CI validation with GitHub Actions
+- Infrastructure change management
+- Declarative configuration management
+- Drift detection and self-healing
+- Platform engineering concepts
+- Cluster recovery and operational documentation
