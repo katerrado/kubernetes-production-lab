@@ -1,0 +1,4 @@
+# Envoy Gateway Helm values
+
+deployment:
+  replicas: 1
