@@ -1,0 +1,7 @@
+# MetalLB Helm values
+#
+# Configuration resources such as IPAddressPool and L2Advertisement
+# are maintained separately from the Helm chart installation.
+
+speaker:
+  enabled: true
