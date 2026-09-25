@@ -22,4 +22,3 @@ spec:
       backendRefs:
         - name: network-test
           port: 80
-
