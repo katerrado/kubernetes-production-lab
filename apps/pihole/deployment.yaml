@@ -36,7 +36,10 @@ spec:
               value: >-
                 address=/test.k8s.home/10.10.10.201;
                 address=/pihole.k8s.home/10.10.10.201;
-                address=/longhorn.k8s.home/10.10.10.201
+                address=/longhorn.k8s.home/10.10.10.201;
+                address=/grafana.k8s.home/10.10.10.201;
+                address=/prometheus.k8s.home/10.10.10.201;
+                address=/argocd.k8s.home/10.10.10.201
           ports:
             - name: dns-tcp
               containerPort: 53
