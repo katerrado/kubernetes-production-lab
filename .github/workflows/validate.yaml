@@ -1,0 +1,55 @@
+name: Validate Kubernetes Manifests
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  validate:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install yamllint
+        run: |
+          python3 -m pip install yamllint
+
+      - name: Lint YAML
+        run: |
+          yamllint \
+            bootstrap \
+            clusters \
+            platform \
+            apps
+
+      - name: Install kubeconform
+        run: |
+          curl -L \
+            https://github.com/yannh/kubeconform/releases/download/v0.8.0/kubeconform-linux-amd64.tar.gz \
+            -o kubeconform.tar.gz
+
+          tar -xzf kubeconform.tar.gz
+
+          chmod +x kubeconform
+
+      - name: Validate Kubernetes manifests
+        run: |
+          find bootstrap clusters platform apps \
+            -type f \
+            \( -name "*.yaml" -o -name "*.yml" \) \
+            ! -name "values.yaml" \
+            -print0 \
+          | xargs -0 ./kubeconform \
+              -strict \
+              -summary \
+              -ignore-missing-schemas
