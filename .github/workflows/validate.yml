@@ -54,10 +54,11 @@ jobs:
 
       - name: Validate Kubernetes manifests
         run: |
-          find . \
+          find ./bootstrap ./clusters ./platform ./apps ./policies \
             -type f \
             \( -name "*.yaml" -o -name "*.yml" \) \
-            ! -path "./.github/*" \
+            ! -name "values.yaml" \
+            ! -name "values.yml" \
             -print0 |
           xargs -0 -r kubeconform \
             -summary \
