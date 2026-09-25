@@ -1,27 +1,36 @@
-# Raw environment inventory
-docs/baseline/raw/
+# Kubernetes secrets
+*secret*.yaml
+*secrets*.yaml
 
-# Kubernetes credentials
-.kube/
-kubeconfig
-*kubeconfig*
-*.key
-*.crt
-
-# Secrets
-*.secret.yaml
-*.secrets.yaml
-secrets/
+# Environment files
 .env
+.env.*
 
-# Helm dependency cache
-charts/
+# Kubeconfig
+kubeconfig
+*.kubeconfig
 
-# Editor files
+# Certificates
+*.crt
+*.key
+*.pem
+*.pfx
+*.p12
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# IDE
 .vscode/
-.idea
-*.swp
+.idea/
 
-# OS files
+# Operating system
 .DS_Store
 Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
