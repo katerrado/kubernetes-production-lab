@@ -10,13 +10,10 @@ on:
       - main
 
 jobs:
-
   validate:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v6
 
@@ -25,12 +22,36 @@ jobs:
           python3 -m pip install yamllint
 
       - name: Lint YAML
+        shell: bash
         run: |
-          yamllint \
-            bootstrap \
-            clusters \
-            platform \
-            apps
+          set -euo pipefail
+
+          ROOTS=()
+
+          for dir in bootstrap clusters platform apps; do
+            if [[ -d "$dir" ]]; then
+              ROOTS+=("$dir")
+            fi
+          done
+
+          echo "Scanning directories:"
+          printf ' - %s\n' "${ROOTS[@]}"
+
+          mapfile -d '' YAML_FILES < <(
+            find "${ROOTS[@]}" \
+              -type f \
+              \( -name "*.yaml" -o -name "*.yml" \) \
+              -print0
+          )
+
+          if [[ ${#YAML_FILES[@]} -eq 0 ]]; then
+            echo "No YAML files found."
+            exit 0
+          fi
+
+          echo "Linting ${#YAML_FILES[@]} YAML file(s)..."
+
+          yamllint "${YAML_FILES[@]}"
 
       - name: Install kubeconform
         run: |
@@ -43,13 +64,35 @@ jobs:
           chmod +x kubeconform
 
       - name: Validate Kubernetes manifests
+        shell: bash
         run: |
-          find bootstrap clusters platform apps \
-            -type f \
-            \( -name "*.yaml" -o -name "*.yml" \) \
-            ! -name "values.yaml" \
-            -print0 \
-          | xargs -0 ./kubeconform \
-              -strict \
-              -summary \
-              -ignore-missing-schemas
+          set -euo pipefail
+
+          ROOTS=()
+
+          for dir in bootstrap clusters platform apps; do
+            if [[ -d "$dir" ]]; then
+              ROOTS+=("$dir")
+            fi
+          done
+
+          mapfile -d '' MANIFESTS < <(
+            find "${ROOTS[@]}" \
+              -type f \
+              \( -name "*.yaml" -o -name "*.yml" \) \
+              ! -name "values.yaml" \
+              -print0
+          )
+
+          if [[ ${#MANIFESTS[@]} -eq 0 ]]; then
+            echo "No Kubernetes manifests found."
+            exit 0
+          fi
+
+          echo "Validating ${#MANIFESTS[@]} Kubernetes manifest(s)..."
+
+          ./kubeconform \
+            -strict \
+            -summary \
+            -ignore-missing-schemas \
+            "${MANIFESTS[@]}"
