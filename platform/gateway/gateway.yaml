@@ -3,7 +3,7 @@ kind: Gateway
 
 metadata:
   name: homelab-gateway
-  namespace: default
+  namespace: gateway-system
 
 spec:
   gatewayClassName: envoy
