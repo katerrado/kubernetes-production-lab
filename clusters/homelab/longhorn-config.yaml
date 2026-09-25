@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn-config
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/katerrado/kubernetes-production-lab.git
+    targetRevision: main
+    path: platform/longhorn
+
+    directory:
+      include: httproute.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: longhorn-system
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

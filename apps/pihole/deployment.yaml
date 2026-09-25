@@ -35,7 +35,8 @@ spec:
             - name: FTLCONF_misc_dnsmasq_lines
               value: >-
                 address=/test.k8s.home/10.10.10.201;
-                address=/pihole.k8s.home/10.10.10.201
+                address=/pihole.k8s.home/10.10.10.201;
+                address=/longhorn.k8s.home/10.10.10.201
           ports:
             - name: dns-tcp
               containerPort: 53
