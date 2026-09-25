@@ -1,5 +1,8 @@
 replicas: 1
 
+args:
+  - --kubelet-insecure-tls
+
 resources:
   requests:
     cpu: 50m
