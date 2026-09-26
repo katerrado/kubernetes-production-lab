@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: homelab-custom-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: homelab.longhorn.rules
+      rules:
+        - alert: LonghornNodeNotReady
+          expr: |
+            longhorn_node_status{condition="ready"} == 0
+          for: 2m
+          labels:
+            severity: warning
+            component: longhorn
+          annotations:
+            summary: "Longhorn node is not ready"
+            description: "Longhorn node {{ $labels.node }} has reported not-ready for more than 2 minutes."
+
+    - name: homelab.test.rules
+      rules:
+        - alert: HomelabTestAlert
+          expr: vector(1)
+          for: 1m
+          labels:
+            severity: info
+            component: monitoring
+          annotations:
+            summary: "Homelab monitoring test alert"
+            description: "Synthetic alert used to validate Prometheus and Alertmanager integration."
