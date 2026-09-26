@@ -13,7 +13,7 @@ spec:
     path: platform/longhorn
 
     directory:
-      include: httproute.yaml
+      include: '{httproute.yaml,servicemonitor.yaml}'
 
   destination:
     server: https://kubernetes.default.svc
