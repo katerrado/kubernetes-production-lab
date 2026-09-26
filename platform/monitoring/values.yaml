@@ -1,6 +1,12 @@
 grafana:
   enabled: true
 
+  sidecar:
+    datasources:
+      enabled: true
+      skipReload: true
+      initDatasources: true
+
   additionalDataSources:
     - name: Loki
       type: loki
