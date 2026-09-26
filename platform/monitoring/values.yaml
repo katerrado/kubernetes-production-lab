@@ -1,6 +1,16 @@
 grafana:
   enabled: true
 
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki-gateway.logging.svc.cluster.local
+      isDefault: false
+      editable: true
+      jsonData:
+        maxLines: 1000
+
   deploymentStrategy:
     type: Recreate
 
