@@ -4,8 +4,19 @@ grafana:
   sidecar:
     datasources:
       enabled: true
-      skipReload: true
-      initDatasources: true
+      skipReload: false
+      initDatasources: false
+
+      envValueFrom:
+        REQ_USERNAME:
+          secretKeyRef:
+            name: grafana-admin-credentials
+            key: admin-user
+
+        REQ_PASSWORD:
+          secretKeyRef:
+            name: grafana-admin-credentials
+            key: admin-password
 
   additionalDataSources:
     - name: Loki
