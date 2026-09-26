@@ -19,15 +19,3 @@ spec:
           annotations:
             summary: "Longhorn node is not ready"
             description: "Longhorn node {{ $labels.node }} has reported not-ready for more than 2 minutes."
-
-    - name: homelab.test.rules
-      rules:
-        - alert: HomelabTestAlert
-          expr: vector(1)
-          for: 1m
-          labels:
-            severity: info
-            component: monitoring
-          annotations:
-            summary: "Homelab monitoring test alert"
-            description: "Synthetic alert used to validate Prometheus and Alertmanager integration."
