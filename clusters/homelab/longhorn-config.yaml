@@ -12,8 +12,8 @@ spec:
     targetRevision: main
     path: platform/longhorn
 
-    directory:
-      include: '{httproute.yaml,servicemonitor.yaml}'
+  directory:
+    include: '{httproute.yaml,servicemonitor.yaml,prometheus-networkpolicy.yaml}'
 
   destination:
     server: https://kubernetes.default.svc
